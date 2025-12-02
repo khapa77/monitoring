@@ -1,0 +1,11 @@
+# 11. logging - Системные логи
+
+echo "/var/log/*.log {
+    daily
+    rotate 7
+    compress
+    delaycompress
+    missingok
+    notifempty
+}" | sudo tee /etc/logrotate.d/custom
+

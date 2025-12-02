@@ -1,0 +1,4 @@
+# 8. package_management - Установка пакетов
+
+echo 'APT::Update::Post-Invoke {"echo $(date) >> /var/log/apt-updates.log";};' | sudo tee /etc/apt/apt.conf.d/15logupdate
+echo 'DPkg::Post-Invoke {"echo $(date) >> /var/log/apt-installs.log";};' | sudo tee /etc/apt/apt.conf.d/15loginstall

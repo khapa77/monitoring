@@ -1,0 +1,18 @@
+# shell - Действия в командной строке
+
+#!/usr/bin/env python3
+import os
+import pty
+import select
+import time
+def monitor_shell():
+    master, slave = pty.openpty()
+    while True:
+        rlist, _, _ = select.select([master], [], [], 0.1)
+        if rlist:
+            data = os.read(master, 1024)
+            if data:
+                timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
+                with open("/var/log/shell-activity.log", "a") as f:
+                    f.write(f"{timestamp}: {data.decode('utf-8', errors='ignore')}\n")
+monitor_shell()

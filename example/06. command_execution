@@ -1,0 +1,5 @@
+# 6. command_execution - Выполнение команд
+
+echo 'export PROMPT_COMMAND="history -a; history -c; history -r"' >> /etc/profile
+echo 'export HISTTIMEFORMAT="%F %T "' >> /etc/profile
+echo 'export HISTFILE=/var/log/command_history.log' >> /etc/profile

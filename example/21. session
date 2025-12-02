@@ -1,0 +1,11 @@
+21. session - SSH сессии
+
+echo "LogLevel VERBOSE" >> /etc/ssh/sshd_config
+echo "SyslogFacility AUTH" >> /etc/ssh/sshd_config
+echo "PrintLastLog yes" >> /etc/ssh/sshd_config
+echo "ClientAliveInterval 300" >> /etc/ssh/sshd_config
+echo "ClientAliveCountMax 2" >> /etc/ssh/sshd_config
+sudo systemctl restart sshd
+tail -f /var/log/auth.log | grep --line-buffered "sshd" | while read line; do
+    echo "$(date): $line" >> /var/log/ssh-sessions.log
+done &

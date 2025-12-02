@@ -1,0 +1,15 @@
+# 19. network_activity - Сетевая активность
+
+#!/usr/bin/env python3
+from scapy.all import sniff
+import datetime
+def packet_callback(packet):
+    if packet.haslayer('IP'):
+        timestamp = datetime.datetime.now()
+        src_ip = packet['IP'].src
+        dst_ip = packet['IP'].dst
+        proto = packet['IP'].proto
+        with open("/var/log/network-activity.log", "a") as f:
+            f.write(f"{timestamp}: {src_ip} -> {dst_ip} proto:{proto}\n")
+sniff(prn=packet_callback, store=0, count=100)
+

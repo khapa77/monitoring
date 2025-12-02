@@ -1,0 +1,7 @@
+# 13. firewall - Правила МЭ
+
+sudo iptables -L -n > /tmp/current_rules.txt
+if ! cmp /tmp/current_rules.txt /var/log/iptables-backup.txt >/dev/null 2>&1; then
+    echo "$(date): Изменены правила iptables" >> /var/log/firewall-changes.log
+    cp /tmp/current_rules.txt /var/log/iptables-backup.txt
+fi

@@ -1,0 +1,6 @@
+#file_integrity - Мониторинг целостности файлов
+
+sudo apt install aide -y
+sudo aideinit
+sudo mv /var/lib/aide/aide.db.new /var/lib/aide/aide.db
+echo "0 2 * * * root /usr/bin/aide --check" | sudo tee /etc/cron.daily/aide-check

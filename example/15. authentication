@@ -1,0 +1,6 @@
+# 15. authentication - Попытки аутентификации
+
+tail -f /var/log/auth.log | grep --line-buffered "Failed password" | while read line; do
+    ip=$(echo $line | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+')
+    echo "$(date): Неудачная попытка входа с IP: $ip" >> /var/log/failed-auth.log
+done &

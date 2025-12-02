@@ -1,0 +1,7 @@
+# 16. physical_security - Физическое вмешательство
+
+if [ -f /sys/class/dmi/id/chassis_type ]; then
+    chassis=$(cat /sys/class/dmi/id/chassis_type)
+    echo "Тип корпуса: $chassis"
+fi
+journalctl -k | grep -i "security\|tamper\|physical"

@@ -1,0 +1,5 @@
+#configuration - Отслеживание изменений конфигураций
+
+inotifywait -m -r /etc --format "%w%f %e" | while read file event; do
+    echo "$(date): Изменен конфигурационный файл: $file ($event)" >> /var/log/config-changes.log
+done &

@@ -1,0 +1,22 @@
+# 12. service_state - Состояние служб
+
+#!/usr/bin/env python3
+import subprocess
+import time
+import json
+def check_services():
+    services = ['apache2', 'mysql', 'ssh', 'nginx']
+    status = {}
+    for service in services:
+        try:
+            result = subprocess.run(['systemctl', 'is-active', service], 
+                                  capture_output=True, text=True)
+            status[service] = result.stdout.strip()
+        except:
+            status[service] = 'not found'
+    with open('/var/log/service-status.json', 'a') as f:
+        json.dump({'timestamp': time.time(), 'services': status}, f)
+        f.write('\n')
+while True:
+    check_services()
+    time.sleep(300)

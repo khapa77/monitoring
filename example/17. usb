@@ -1,0 +1,9 @@
+# 17. usb - Подключение USB
+
+lsusb > /tmp/current_usb.txt
+if ! cmp /tmp/current_usb.txt /var/log/usb-backup.txt >/dev/null 2>&1; then
+    echo "$(date): Обнаружены изменения в USB устройствах" >> /var/log/usb-changes.log
+    diff /var/log/usb-backup.txt /tmp/current_usb.txt >> /var/log/usb-changes.log
+    cp /tmp/current_usb.txt /var/log/usb-backup.txt
+fi
+

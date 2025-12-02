@@ -1,0 +1,4 @@
+# 10. server_state - Перезагрузки сервера
+
+journalctl --list-boots > /var/log/boot-history.log
+echo "@reboot root echo \$(date) >> /var/log/reboots.log" | sudo tee /etc/cron.d/reboot-log

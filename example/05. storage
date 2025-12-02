@@ -1,0 +1,7 @@
+# 5. storage - События дисков
+
+for disk in /dev/sd[a-z]; do
+    if [ -e "$disk" ]; then
+        smartctl -H $disk | grep "SMART Health Status" >> /var/log/disk-health.log
+    fi
+done

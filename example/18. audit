@@ -1,0 +1,14 @@
+# 18. audit - Аудит системы
+
+sudo apt install auditd audispd-plugins -y
+cat << EOF | sudo tee /etc/audit/rules.d/audit.rules
+-w /etc/passwd -p wa -k identity
+-w /etc/shadow -p wa -k identity
+-w /etc/gshadow -p wa -k identity
+-w /etc/group -p wa -k identity
+-w /var/log/faillog -p wa -k logins
+-w /var/log/lastlog -p wa -k logins
+-w /var/log/tallylog -p wa -k logins
+EOF
+sudo service auditd restart
+

@@ -1,0 +1,29 @@
+# aide - система обнаружения вторжений и мониторинга целостности файлов
+
+# auditd - фреймворк аудита ядра Linux
+
+# inotify-tools - утилиты для отслеживания изменений файлов
+
+# smartmontools - мониторинг здоровья дисков (SMART)
+
+# rkhunter - сканер руткитов и уязвимостей
+
+# python3-pip - менеджер пакетов Python
+
+# pyudev - Python библиотека для работы с устройствами
+
+# scapy - мощная библиотека для работы с сетевыми пакетами
+
+sudo apt update
+sudo apt install -y \
+    aide          # для file_integrity (пункт 1)
+    auditd        # для executable (пункт 3)
+    inotify-tools # для configuration (пункт 2)
+    smartmontools # для storage (пункт 5)
+    rkhunter      # для malware (пункт 14)
+    python3-pip   # для установки Python библиотек
+
+
+    sudo pip3 install \
+    pyudev        # для device_connection (пункт 4)
+    scapy         # для network_activity (пункт 19)

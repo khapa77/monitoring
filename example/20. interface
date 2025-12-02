@@ -1,0 +1,8 @@
+# 20. interface - Изменения сетевых интерфейсов
+
+ip -o link show > /tmp/current_interfaces.txt
+if ! cmp /tmp/current_interfaces.txt /var/log/interface-backup.txt >/dev/null 2>&1; then
+    echo "$(date): Изменены сетевые интерфейсы" >> /var/log/interface-changes.log
+    diff /var/log/interface-backup.txt /tmp/current_interfaces.txt >> /var/log/interface-changes.log
+    cp /tmp/current_interfaces.txt /var/log/interface-backup.txt
+fi

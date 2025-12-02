@@ -1,0 +1,12 @@
+# device_connection - Подключение устройств
+
+#!/usr/bin/env python3
+import pyudev
+import datetime
+context = pyudev.Context()
+monitor = pyudev.Monitor.from_netlink(context)
+monitor.filter_by(subsystem='block')
+for device in iter(monitor.poll, None):
+    if device.action == 'add':
+        timestamp = datetime.datetime.now()
+        print(f"{timestamp}: Подключено устройство: {device.device_node}")

@@ -1,0 +1,6 @@
+# 9. account_management - Управление учетными записями
+
+echo "-w /etc/passwd -p wa -k user_changes" | sudo tee -a /etc/audit/rules.d/audit.rules
+echo "-w /etc/shadow -p wa -k user_changes" | sudo tee -a /etc/audit/rules.d/audit.rules
+echo "-w /etc/group -p wa -k user_changes" | sudo tee -a /etc/audit/rules.d/audit.rules
+sudo service auditd restart
